@@ -1,0 +1,12 @@
+* gtags.conf-tutorial
+[[https://www.gnu.org/software/global/global.html][GNU GLOBAL]] is a great tool. Unfortunately its config file is the weakest part. It is extremely confusing for all, but the oldest greybreads and [[https://www.gnu.org/software/global/globaldoc_toc.html#gtags_002econf][the manual]] is both confusing and scarce at expaining the format used by it. This is a quick tutorial that should help you to get some understanding of it.
+* Records
+gtags.conf is structured a set of records, with each record being a set of fields. Fields are separated by ":". The first field in a record is its name. Record names are also known as labels. Fields after the name are variable definitions.
+* Execution
+At the execution time gtags reads one record by its name. That record is known as the target in the manual. You can specify which target is used either by setting GTAGSLABEL environment variable, or passing it with --gtagslabel flag. The default target is called "default". As you can see, there are 6 targets avaiable out of box: default, native, user, ctags, new-ctags and pygments.
+* Multiline records
+Each record ends on a newline, unless the line ends with "\". This allows to continue the same record on the next line. This is used extensively in gtags.conf.
+* String variables
+Variables can be of different types. The most common are strings which have the format of "key=value".
+* Including another record
+Since global only launches one target at a time and some settings may be common for multiple targets, there's a need to be able to define shared stuff in a single place. For this there's tc special variable. Wherever there's a variable definition like "tc=value" it tells global to read the contents of a record that has a "value" of it's record label. "tc=exuberant-ctags" tells global to read the contents of "exuberant-ctags" record.
